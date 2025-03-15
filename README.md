@@ -75,18 +75,20 @@
 
 客户端基本流程如下所示：
 
-```sequence
-客户端->服务端: 请求challenge
-服务端-->服务端: 生成challenge，写入redis
-服务端-->客户端: 响应challenge
-客户端->客户端: 计算结果
-客户端->服务端: 提交结果
-服务端-->服务端: 查询redis，验证结果
-服务端-->客户端: 生成并响应token
-客户端->业务服务器: 携带token发送自定义业务请求
-业务服务器->服务端: 验证token
-服务端-->业务服务器: 响应验证结果
-业务服务器->客户端: 响应业务请求
+```mermaid
+sequenceDiagram
+    autonumber
+    客户端->>服务端: 请求challenge
+    服务端-->>服务端: 生成challenge，写入redis
+    服务端-->>客户端: 响应challenge
+    客户端->>客户端: 计算结果
+    客户端->>服务端: 提交结果
+    服务端-->>服务端: 查询redis，验证结果
+    服务端-->>客户端: 生成并响应token
+    客户端->>业务服务器: 携带token发送自定义业务请求
+    业务服务器->>服务端: 验证token
+    服务端-->>业务服务器: 响应验证结果
+    业务服务器->>客户端: 响应业务请求
 ```
 
 ## 贡献
@@ -98,4 +100,5 @@
 
 ## 许可证
 
-本项目采用 [AGPLv3 License](LICENSE) 许可证。
+本项目采用 [AGPLv3 License](LICENSE-AGPLv3) 和 [LGPLv3 License](LICENSE-LGPLv3) 双许可证授权。
+其中 server(服务端)部分采用 AGPLv3 License，client(客户端)部分采用 LGPLv3 License，请注意区别。
