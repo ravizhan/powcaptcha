@@ -1,0 +1,24 @@
+[project]
+name = "powcaptcha"
+version = "0.1.0"
+description = "基于工作量证明的验证码系统 - Python客户端"
+readme = "README.md"
+authors = [
+    { name = "ravizhan", email = "ravizhan@hotmail.com" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "httpx>=0.28.1",
+]
+
+[project.scripts]
+powcaptcha = "powcaptcha:captcha"
+
+[project.urls]
+Homepage = "https://github.com/ravizhan/powcaptcha"
+Repository = "https://github.com/ravizhan/powcaptcha.git"
+Issues = "https://github.com/ravizhan/powcaptcha/issues"
+
+[build-system]
+requires = ["uv_build>=0.6.6,<0.7"]
+build-backend = "uv_build"

@@ -1,0 +1,10 @@
+{
+  "secret": "a-string-secret-at-least-256-bits-long",
+  "redis": {
+    "host": "127.0.0.1",
+    "port": "6379",
+    "db": 1,
+    "password": ""
+  },
+  "difficulty": 42
+}
