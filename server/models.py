@@ -5,10 +5,10 @@ class ChallengeBase(BaseModel):
     id: str
 
 class RequestChallengeResponse(ChallengeBase):
-    question: int
+    question: str
 
 class SubmitChallengeRequest(ChallengeBase):
-    answer: list[int]
+    answer: list[str]
 
 class SubmitChallenge(BaseModel):
     challenge: SubmitChallengeRequest

@@ -9,10 +9,14 @@ class PrimeGenerator:
         p = self.generate_prime()
         q = self.generate_prime()
         return p * q, p, q
+    
+    @staticmethod
+    def get_k_bit_random(k):
+        return random.randint(2**(k-1), 2**k - 1)
 
     def generate_prime(self):
         while True:
-            num = random.getrandbits(self.bits)
+            num = self.get_k_bit_random(self.bits)
             if self.is_prime(num):
                 return num
 

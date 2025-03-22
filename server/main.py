@@ -40,7 +40,7 @@ def request_challenge(request: Request, user_agent: Annotated[str, Header()]):
     resp = {
         "challenge": {
             "id": challenge_id,
-            "question": challenge
+            "question": str(challenge)
         }
     }
     return resp
@@ -54,7 +54,7 @@ def submit_answer(data: SubmitChallenge):
         return {"message": "Invalid challenge id"}
     r.expire(data.challenge.id, 60)
     for i in range(len(answer)):
-        if answer[i] != redis_data["challenge"]["answer"][i]:
+        if int(answer[i]) != redis_data["challenge"]["answer"][i]:
             return {"message": "Incorrect answer"}
     jwt_token = jwt.encode({"challenge_id": data.challenge.id, "ip": redis_data["ip"], "ua": redis_data["ua"]},secret_key)
     return {"message": "Correct answer", "token": jwt_token}
