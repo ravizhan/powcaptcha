@@ -12,23 +12,22 @@ class PowCaptcha:
         self.challenge = None
         req = self.session.get("/request_challenge")
         if req.status_code == 200:
-            self.challenge = req.json()["challenge"]
-            return self.challenge
+            return req.json()["challenge"]
         else:
             return None
 
-    def solve_challenge(self) -> None|list:
-        n = self.challenge["question"]
-        factors = self.prime_challenge.calc(n)
+    def solve_challenge(self, challenge) -> None|list:
+        n = int(challenge["question"])
+        factors = self.prime_challenge.calc(int(n))
         if len(factors) == 2 and factors[0] * factors[1] == n:
-            return sorted(factors)
+            return [str(i) for i in sorted(factors)]
         else:
             return None
 
-    def submit_answer(self, answer: list):
+    def submit_answer(self, challenge_id, answer: list):
         data = {
             "challenge": {
-                "id": self.challenge["id"],
+                "id": challenge_id,
                 "answer": answer
             },
         }
@@ -43,6 +42,6 @@ class PowCaptcha:
         if challenge is None:
             return None
         else:
-            answer = self.solve_challenge()
-        result = self.submit_answer(answer)
+            answer = self.solve_challenge(challenge)
+        result = self.submit_answer(challenge["id"], answer)
         return result
